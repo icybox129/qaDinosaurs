@@ -1,6 +1,7 @@
 package com.qa.qaDinosaurs.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +14,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.qaDinosaurs.model.Dinosaurs;
+import com.qa.qaDinosaurs.services.ServiceDB;
 import com.qa.qaDinosaurs.services.Services;
 
 @RestController
 public class ControllerResponseEntity {
 
-	private Services services;
+	private ServiceDB services;
 
-	public ControllerResponseEntity(Services services) {
+	public ControllerResponseEntity(ServiceDB services) {
 		super();
 		this.services = services;
 	}
@@ -51,9 +53,9 @@ public class ControllerResponseEntity {
 	// requested
 
 	@GetMapping("/getDino")
-	public ResponseEntity<ArrayList<Dinosaurs>> getDino() {
+	public ResponseEntity<List<Dinosaurs>> getDino() {
 
-		ArrayList<Dinosaurs> result = services.getDino();
+		List<Dinosaurs> result = services.getDino();
 
 		return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
 	}
@@ -68,21 +70,21 @@ public class ControllerResponseEntity {
 	}
 
 	// Listens for a /get/<number> (Path variable)
-	@GetMapping("/get/{index}") // Path variable
+	@GetMapping("/get/{id}") // Path variable
 	// Whatever the name of your path variable is, tell Spring to look for it
-	public ResponseEntity<Dinosaurs> getByIndex(@PathVariable("index") int index) {
+	public ResponseEntity<Dinosaurs> getById(@PathVariable("id") long id) {
 
 		// Making an object variable called result = the data we're retrieving
-		Dinosaurs result = services.getByIndex(index);
+		Dinosaurs result = services.getById(id);
 		return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
 	}
 
 	// Listens for /delete/<number> and deletes the object of that index
-	@DeleteMapping("/delete/{index}")
-	public ResponseEntity<String> deleteByIndex(@PathVariable("index") int index) {
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> deleteByid(@PathVariable("id") long id) {
 
-		services.deleteByIndex(index);
-		String response = "Dinosaur " + index + " removed!";
+		services.deleteById(id);
+		String response = "Dinosaur " + id + " removed!";
 		return new ResponseEntity<String>(response, HttpStatus.ACCEPTED);
 	}
 
@@ -95,10 +97,10 @@ public class ControllerResponseEntity {
 		return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
 	}
 
-	@PutMapping("/update/{index}")
-	public ResponseEntity<String> updateByIndex(@PathVariable("index") int index, @RequestBody Dinosaurs dino) {
+	@PutMapping("/update/{id}")
+	public ResponseEntity<String> updateById(@PathVariable("id") long id, @RequestBody Dinosaurs dino) {
 
-		services.updateByIndex(index, dino);
+		services.updateById(id, dino);
 		String response = "Dinosaur " + dino.getName() + " updated!";
 		return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
 	}

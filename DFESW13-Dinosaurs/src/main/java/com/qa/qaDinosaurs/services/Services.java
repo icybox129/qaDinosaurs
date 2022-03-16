@@ -9,7 +9,7 @@ import com.qa.qaDinosaurs.repo.Repo;
 
 // This tells Spring this is our services class
 // Services is the business logic, pushing data to DB / arrayList, updating, deleting etc.
-@Service
+//@Service
 public class Services {
 	
 	// Specify that we want to use our repo class
