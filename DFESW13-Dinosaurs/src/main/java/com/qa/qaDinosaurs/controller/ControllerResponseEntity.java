@@ -105,10 +105,34 @@ public class ControllerResponseEntity {
 		return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
 	}
 
-	@PostMapping("/postArray")
-	public ResponseEntity<ArrayList<Dinosaurs>> addArray(@RequestBody Dinosaurs[] dinoArray) {
-
-		ArrayList<Dinosaurs> result = services.addArray(dinoArray);
-		return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+//	@PostMapping("/postArray")
+//	public ResponseEntity<ArrayList<Dinosaurs>> addArray(@RequestBody Dinosaurs[] dinoArray) {
+//
+//		ArrayList<Dinosaurs> result = services.addArray(dinoArray);
+//		return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+//	}
+	
+	@GetMapping("/getType/{type}")
+	public ResponseEntity<List<Dinosaurs>> getByType(@PathVariable("type") String type) {
+		
+		List<Dinosaurs> response = services.getByType(type);
+		
+		return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/getHeight/{height}")
+	public ResponseEntity<List<Dinosaurs>> getByHeight(@PathVariable("height") int height) {
+		
+		List<Dinosaurs> response = services.getByHeight(height);
+		
+		return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/getTypeHeightDesc/{type}")
+	public ResponseEntity<List<Dinosaurs>> getByTypeHeightDesc(@PathVariable("type") String type) {
+		
+		List<Dinosaurs> response = services.getByTypeHeightDesc(type);
+		
+		return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
 	}
 }

@@ -68,9 +68,21 @@ public class ServiceDB {
 		return true;
 	}
 
-	public ArrayList<Dinosaurs> addArray(Dinosaurs[] dinoArray) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Dinosaurs> getByType(String type) {
+		return repo.findByType(type);
 	}
+
+	public List<Dinosaurs> getByHeight(int height) {
+		return repo.findByHeightGreaterThan(height);
+	}
+
+	public List<Dinosaurs> getByTypeHeightDesc(String type) {
+		return repo.findByTypeOrderByHeightDesc(type);
+	}
+
+//	public ArrayList<Dinosaurs> addArray(Dinosaurs[] dinoArray) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }
