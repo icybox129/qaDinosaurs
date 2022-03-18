@@ -23,9 +23,9 @@ public class ServiceDB {
 		return repo.findAll();
 	}
 
-	public boolean createDino(Dinosaurs dino) {
-		repo.save(dino);
-		return true;
+	public Dinosaurs createDino(Dinosaurs dino) {
+		Dinosaurs savedObject = repo.save(dino);
+		return savedObject;
 	}
 
 	public Dinosaurs getById(long id) {
