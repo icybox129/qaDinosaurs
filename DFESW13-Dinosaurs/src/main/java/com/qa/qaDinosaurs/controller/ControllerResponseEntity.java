@@ -70,7 +70,7 @@ public class ControllerResponseEntity {
 	}
 
 	// Listens for a /get/<number> (Path variable)
-	@GetMapping("/get/{id}") // Path variable
+	@GetMapping("/getId/{id}") // Path variable
 	// Whatever the name of your path variable is, tell Spring to look for it
 	public ResponseEntity<Dinosaurs> getById(@PathVariable("id") long id) {
 
